@@ -3,14 +3,14 @@ FauxPas = require "./faux_pas/fauxPas"
 
 module.exports = (robot) ->
 
-  robot.hear /codered andon$/i, (msg) ->
+  robot.hear /andon$/i, (msg) ->
     codeRed = new CodeRed(robot, msg)
     codeRed.andonResponse()
 
-  robot.hear /fauxpas andon.*/i, (msg)->
+  robot.hear /fauxpas andon/i, (msg)->
     fauxPas = new FauxPas(robot, msg)
     fauxPas.lightsOn()
 
-  robot.hear /fauxpas andoff.*$/i, (msg) ->
+  robot.hear /fauxpas andoff$/i, (msg) ->
     fauxPas = new FauxPas(robot, msg)
     fauxPas.lightsOff()

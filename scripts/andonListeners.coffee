@@ -3,7 +3,9 @@ FauxPas = require "./faux_pas/fauxPas"
 
 module.exports = (robot) ->
 
-  robot.hear /andon$/i, (msg) ->
+  # TODO Add a listener for "andon" and print a list of the below commands
+
+  robot.hear /codered andon$/i, (msg) ->
     codeRed = new CodeRed(robot, msg)
     codeRed.andonResponse()
 

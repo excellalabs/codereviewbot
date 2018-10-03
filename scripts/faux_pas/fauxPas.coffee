@@ -4,7 +4,7 @@ module.exports =
 class FauxPas extends ChannelResponder
 
   constructor: (robot, msg)->
-    channelId = 'G6WUAFP2S'
+    channelId = process.env.FAUXPAS_SLACK_CHANNEL_ID
     super(channelId, robot, msg)
 
   iftttKey: process.env.FAUXPAS_IFTTT_KEY

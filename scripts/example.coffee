@@ -1,5 +1,5 @@
 module.exports = (robot) ->
-  robot.hear /fauxbottest/i, (res) ->
+  robot.hear /evebot test/i, (res) ->
     res.send "It's working."
 
   # robot.hear /badger/i, (res) ->

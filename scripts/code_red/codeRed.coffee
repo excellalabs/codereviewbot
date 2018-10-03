@@ -8,4 +8,4 @@ class CodeRed extends ChannelResponder
     super(channelId, robot, msg)
 
   andonResponse: () ->
-    @msg.send "@here CODE RED! Stop what you're doing find out you can do to help."
+    @msg.send "@here CODE RED! \n Stop what you're doing. Find out what you can do to help."

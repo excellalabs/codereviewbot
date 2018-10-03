@@ -4,7 +4,7 @@ module.exports =
 class FauxPas extends ChannelResponder
 
   constructor: (robot, msg)->
-    channelId = 'C6M046SBS' #'G6WUAFP2S'
+    channelId = 'G6WUAFP2S'
     super(channelId, robot, msg)
 
   lightsOn: () ->

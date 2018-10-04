@@ -1,6 +1,7 @@
 # evebot
 A hubot that should contain all the bot functions that are used by everify. Functions such as enr-cr should be moved to this bot.
 
+
 Currenly, evebot is set up to listen for an andon cord message. It will work only in the fauxpas and eve_code_red channel. Folders have been created for the big sillies and bits plase teams to create their own scripts.
 
 ### Local Development

@@ -10,5 +10,7 @@ class ChannelResponder
 
   validateRoomId: ()->
     if @msgRoomId != @channelId
-      @robot.logger.error "Command not allowed in this channel! Allowed in room id: #{@channelId} Messge from room id: #{@msgRoomId}"
+      response = "Command not allowed in this channel! \n You called this command in channel '#{@msgRoomId}', but it is only allowed in channel '#{@channelId}'"
+      @msg.send response
+      @robot.logger.error response
       throw new Error

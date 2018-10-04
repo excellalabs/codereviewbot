@@ -4,7 +4,7 @@ module.exports =
 class CodeRed extends ChannelResponder
 
   constructor: (robot, msg)->
-    channelId = ''
+    channelId = undefined
     super(channelId, robot, msg)
 
   andonResponse: () ->

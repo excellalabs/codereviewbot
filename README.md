@@ -6,7 +6,7 @@ Currenly, evebot is set up to listen for an andon cord message. It will work onl
 
 ### Local Development
 1. Clone the repo.
-2. Run `npm instlal`
+2. Run `npm install`
 3. Write code
 4. Run the bot locally with `HUBOT_SLACK_TOKEN=<your_token_here>./bin/hubot -a slack`
 

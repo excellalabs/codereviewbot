@@ -23,4 +23,3 @@ class FauxPas extends ChannelResponder
     @robot.http(url)
       .get() (httpErr, httpRes) =>
         @msg.send httpRes
-        

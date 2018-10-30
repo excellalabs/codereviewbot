@@ -11,21 +11,23 @@ module.exports = (robot) ->
     `@evebot` must be added to the channel, and have a response coded for that channel.\n \
     "
 
-  robot.hear /andon$/i, (msg) ->
+  robot.hear /andon/i, (msg) ->
     slackRoom = msg.envelope.room
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndon(msg)
+    if slackRoom == process.env.CODERED_SLACK_CHANNEL_ID
+      codeRedAndon(msg)
 
   robot.hear /andoff/i, (msg) ->
     slackRoom = msg.envelope.room
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndoff(msg)
 
-  robot.hear /codered andon$/i, (msg) ->
+  codeRedAndon = (msg) ->
     codeRed = new CodeRed(robot, msg)
     codeRed.andonResponse()
 
-  fauxPasAndon = (msg) ->
+  fauxPasAndon = (msg) -> 
     fauxPas = new FauxPas(robot, msg)
     fauxPas.lightsOn();
 

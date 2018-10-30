@@ -22,8 +22,6 @@ module.exports = (robot) ->
     slackRoom = msg.envelope.room
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndoff(msg)
-    if slackRoom == process.env.CODERED_SLACK_CHANNEL_ID
-      codeRedAndon(msg)
 
   codeRedAndon = (msg) ->
     codeRed = new CodeRed(robot, msg)

@@ -191,7 +191,8 @@ module.exports = (robot) ->
       ['brian.palladino', 'cameron.ivey', 'daniel.herndon',
       'justdroo', 'daneweber', 'dchang',
       'hugh.gardiner', 'khoi',
-      'joehunt', 'jenpen', 'glenn.espinosa', 'josh.cohen']
+      'joehunt', 'jenpen', 'glenn.espinosa', 'josh.cohen',
+      'Nick Bristow', 'Andy Whitely', 'andrew', 'jay_danielian']
     ]
     robot.brain.set('enr-cr', data)
 

@@ -7,16 +7,10 @@ module.exports = (robot) ->
 
   robot.hear /andon/i, (msg) ->
     slackRoom = msg.envelope.room
-    console.log slackRoom
-    console.log "--------------------------"
-    console.log process.env.CODERED_SLACK_CHANNEL_ID
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
-      console.log "hit"
       fauxPasAndon(msg)
     if slackRoom == process.env.CODERED_SLACK_CHANNEL_ID
-      console.log "hit"
       codeRedAndon(msg)
-
 
   robot.hear /andoff/i, (msg) -> 
     slackRoom = msg.envelope.room

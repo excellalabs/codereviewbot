@@ -22,5 +22,4 @@ class FauxPas extends ChannelResponder
     url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{@iftttKey}"
     @robot.http(url)
       .get() (httpErr, httpRes) =>
-        @msg.send "lights off..."
         @msg.send httpRes

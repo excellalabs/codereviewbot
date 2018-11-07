@@ -1,6 +1,6 @@
 CodeRed = require "./code_red/codeRed"
 FauxPas = require "./faux_pas/fauxPas"
-
+BigSillies = require "./big_sillies/bigSillies"
 module.exports = (robot) ->
 
   # TODO Add a listener for "andon-help" and print a list of the below commands
@@ -17,6 +17,8 @@ module.exports = (robot) ->
       fauxPasAndon(msg)
     if slackRoom == process.env.CODERED_SLACK_CHANNEL_ID
       codeRedAndon(msg)
+    if slackRoom == process.env.BIGSILLIES_SLACK_CHANNEL_ID
+      bigSilliesAndon(msg)
 
   robot.hear /andoff/i, (msg) ->
     slackRoom = msg.envelope.room
@@ -34,3 +36,7 @@ module.exports = (robot) ->
   fauxPasAndoff = (msg) ->
     fauxPas = new FauxPas(robot, msg)
     fauxPas.lightsOff()
+
+  bigSilliesAndon = (msg) -> 
+    bigSillies = new BigSillies(robot, msg)
+    bigSillies.lightsOn();

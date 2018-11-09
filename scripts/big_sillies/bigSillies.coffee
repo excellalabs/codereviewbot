@@ -7,10 +7,10 @@ class BigSillies extends ChannelResponder
     channelId = process.env.BIGSILLIES_SLACK_CHANNEL_ID
     super(channelId, robot, msg)
 
-    iftttKey: process.env.SILLIES_IFTTT_KEY
+    silliesIftttKey: process.env.SILLIES_IFTTT_KEY
 
   lightsOn: () ->
-    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{@iftttKey}"
+    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{@silliesIftttKey}"
     @robot.http(url)
       .get() (httpErr , httpRes) =>
         @msg.send "@here ANDON CORD PULLED!!!"
@@ -19,7 +19,7 @@ class BigSillies extends ChannelResponder
         setTimeout callback, 30000
 
   lightsOff: () ->
-    url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{@iftttKey}"
+    url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{@silliesIftttKey}"
     @robot.http(url)
       .get() (httpErr, httpRes) =>
         @msg.send httpRes

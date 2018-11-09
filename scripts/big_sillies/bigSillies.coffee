@@ -7,7 +7,7 @@ class BigSillies extends ChannelResponder
     channelId = process.env.BIGSILLIES_SLACK_CHANNEL_ID
     super(channelId, robot, msg)
 
-    silliesIftttKey: process.env.SILLIES_IFTTT_KEY
+  silliesIftttKey: process.env.SILLIES_IFTTT_KEY
 
   lightsOn: () ->
     url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{@silliesIftttKey}"

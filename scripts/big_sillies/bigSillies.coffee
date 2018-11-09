@@ -13,6 +13,7 @@ class BigSillies extends ChannelResponder
     url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{@silliesIftttKey}"
     @robot.http(url)
       .get() (httpErr , httpRes) =>
-        @msg.send "@here ANDON CORD PULLED!!!"
+        @msg.send "quiet ANDON CORD PULLED!!!"
         @msg.send httpRes
+        console.log(httpErr)
     

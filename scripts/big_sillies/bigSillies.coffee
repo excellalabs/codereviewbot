@@ -15,11 +15,4 @@ class BigSillies extends ChannelResponder
       .get() (httpErr , httpRes) =>
         @msg.send "@here ANDON CORD PULLED!!!"
         @msg.send httpRes
-        callback = @lightsOff.bind(this)
-        setTimeout callback, 30000
-
-  lightsOff: () ->
-    url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{@silliesIftttKey}"
-    @robot.http(url)
-      .get() (httpErr, httpRes) =>
-        @msg.send httpRes
+    

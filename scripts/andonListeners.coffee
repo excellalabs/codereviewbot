@@ -34,7 +34,7 @@ module.exports = (robot) ->
     codeRed = new CodeRed(robot, msg)
     codeRed.andonResponse()
 
-  fauxPasAndon = (msg) -> 
+  fauxPasAndon = (msg) ->
     fauxPas = new FauxPas(robot, msg)
     fauxPas.lightsOn();
 
@@ -42,11 +42,11 @@ module.exports = (robot) ->
     fauxPas = new FauxPas(robot, msg)
     fauxPas.lightsOff()
 
-  bigSilliesAndon = (msg) -> 
+  bigSilliesAndon = (msg) ->
     bigSillies = new BigSillies(robot, msg)
     bigSillies.lightsOn();
 
-  bitsPleaseAndon = (msg) -> 
+  bitsPleaseAndon = (msg) ->
     bitsPlease = new BitsPlease(robot, msg)
     bitsPlease.lightsOn()
 

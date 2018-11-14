@@ -14,7 +14,7 @@ module.exports = (robot) ->
 
   robot.hear /andon/i, (msg) ->
     slackRoom = msg.envelope.room
-    console.log(msg)
+    console.log("Message sent: ")
     console.log(msg.envelope.message.text)
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndon(msg)
@@ -37,8 +37,11 @@ module.exports = (robot) ->
     codeRed.andonResponse()
 
   fauxPasAndon = (msg) ->
-    fauxPas = new FauxPas(robot, msg)
-    fauxPas.lightsOn();
+    text = msg.envelope.message.text
+    regex = /^((andon)+.*)*(.*(andon) *)*$/i
+    if (regex.test(text))
+      fauxPas = new FauxPas(robot, msg)
+      fauxPas.lightsOn();
 
   fauxPasAndoff = (msg) ->
     fauxPas = new FauxPas(robot, msg)

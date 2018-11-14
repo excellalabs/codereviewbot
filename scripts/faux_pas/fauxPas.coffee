@@ -10,6 +10,7 @@ class FauxPas extends ChannelResponder
   iftttKey: process.env.FAUXPAS_IFTTT_KEY
 
   lightsOn: () ->
+    console.log("calling it")
     url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{@iftttKey}"
     @robot.http(url)
       .get() (httpErr , httpRes) =>

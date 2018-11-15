@@ -12,7 +12,7 @@ module.exports = (robot) ->
     `@evebot` must be added to the channel, and have a response coded for that channel.\n \
     "
 
-  robot.hear /andon/i, (msg) ->
+  robot.hear /^( *andon.*|.*andon *)$/i, (msg) ->
     slackRoom = msg.envelope.room
     console.log("Message sent: ")
     console.log(msg.envelope.message.text)
@@ -25,7 +25,7 @@ module.exports = (robot) ->
     if slackRoom == process.env.BITSPLEASE_SLACK_CHANNEL_ID
       bitsPleaseAndon(msg)
 
-  robot.hear /andoff/i, (msg) ->
+  robot.hear /^( *andoff.*|.*andoff *)$/i, (msg) ->
     slackRoom = msg.envelope.room
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndoff(msg)

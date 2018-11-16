@@ -27,6 +27,8 @@ module.exports = (robot) ->
 
   robot.hear /^( *andoff.*|.*andoff *)$/i, (msg) ->
     slackRoom = msg.envelope.room
+    if slackRoom == process.env.BIGSILLIES_SLACK_CHANNEL_ID
+      bigSilliesAndon(msg)
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndoff(msg)
     if slackRoom == process.env.BITSPLEASE_SLACK_CHANNEL_ID
@@ -50,6 +52,10 @@ module.exports = (robot) ->
   bigSilliesAndon = (msg) ->
     bigSillies = new BigSillies(robot, msg)
     bigSillies.lightsOn();
+
+  bigSilliesAndiff = (msg) ->
+    bigSillies = new BigSillies(robot, msg)
+    bigSillies.lightsOff();
 
   bitsPleaseAndon = (msg) ->
     bitsPlease = new BitsPlease(robot, msg)

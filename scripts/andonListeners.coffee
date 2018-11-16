@@ -28,11 +28,21 @@ module.exports = (robot) ->
   robot.hear /^( *andoff.*|.*andoff *)$/i, (msg) ->
     slackRoom = msg.envelope.room
     if slackRoom == process.env.BIGSILLIES_SLACK_CHANNEL_ID
-      bigSilliesAndon(msg)
+      bigSilliesAndoff(msg)
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndoff(msg)
     if slackRoom == process.env.BITSPLEASE_SLACK_CHANNEL_ID
       bitsPleaseAndoff(msg)
+
+  robot.hear /^( *sillyOn.*|.*sillyOn *)$/i, (msg) ->
+    slackRoom = msg.envelope.room
+    if slackRoom == process.env.BIGSILLIES_SLACK_CHANNEL_ID
+      bigSilliesLights(msg)
+
+  robot.hear /^( *sillyOff.*|.*sillyOff *)$/i, (msg) ->
+    slackRoom = msg.envelope.room
+    if slackRoom == process.env.BIGSILLIES_SLACK_CHANNEL_ID
+      bigSilliesLightsOff(msg)
 
   codeRedAndon = (msg) ->
     codeRed = new CodeRed(robot, msg)
@@ -53,7 +63,15 @@ module.exports = (robot) ->
     bigSillies = new BigSillies(robot, msg)
     bigSillies.lightsOn();
 
-  bigSilliesAndiff = (msg) ->
+  bigSilliesAndoff = (msg) ->
+    bigSillies = new BigSillies(robot, msg)
+    bigSillies.lightsOff();
+
+  bigSilliesLights = (msg) ->
+    bigSillies = new BigSillies(robot, msg)
+    bigSillies.lights();
+
+  bigSilliesLightsOff = (msg) ->
     bigSillies = new BigSillies(robot, msg)
     bigSillies.lightsOff();
 

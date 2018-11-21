@@ -82,11 +82,10 @@ class CodeReview extends ChannelResponder
 
   resetDataStructure: ->
     data =[
-      ['brian.palladino', 'cameron.ivey', 'daniel.herndon',
-      'justdroo', 'daneweber', 'dchang',
-      'hugh.gardiner', 'khoi',
-      'joehunt', 'jenpen', 'glenn.espinosa', 'josh.cohen',
-      'Nick Bristow', 'Andy Whitely', 'andrew', 'jay_danielian']
+      ['Josh Cohen', 'jen.pengelly ', 'hughjgardiner', 'daneweber', 'Cameron Ivey', 'jason.m.danielian',
+        'dchang', 'glenn.espinosa', 'Khoi Le', 'daniel.herndon', 'joehunt', 'andrew.eason', 'Andy Whitley',
+        'brian.d.palladino', 'Nick Bristow', 'drew.nickerson'
+      ]
     ]
     @robot.brain.set('enr-cr', data)
 

@@ -9,7 +9,7 @@ class ChannelResponder
     @validateRoomId()
 
   validateRoomId: ()->
-    if @msgRoomId != @channelId
+    if @msgRoomId != @channelId && process.env.CODE_RED_SLACK_CHANNEL_ID
       response = "Command not allowed in this channel! \n You called this command in channel '#{@msgRoomId}', but it is only allowed in channel '#{@channelId}'"
       @msg.send response
       @robot.logger.error response

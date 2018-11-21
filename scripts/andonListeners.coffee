@@ -18,9 +18,6 @@ module.exports = (robot) ->
     console.log(msg.envelope.message.text)
     if slackRoom == process.env.CODE_RED_SLACK_CHANNEL_ID
       codeRedAndon(msg)
-      fauxPasAndon(msg)
-      bigSilliesAndon(msg)
-      bitsPleaseAndon(msg)
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndon(msg)
     if slackRoom == process.env.BIGSILLIES_SLACK_CHANNEL_ID
@@ -50,6 +47,12 @@ module.exports = (robot) ->
   codeRedAndon = (msg) ->
     codeRed = new CodeRed(robot, msg)
     codeRed.andonResponse()
+    bigSillies = new BigSillies(robot, msg)
+    bigSillies.lights();
+    fauxPas = new FauxPas(robot, msg)
+    fauxPas.light();
+    bitsPlease = new BitsPlease(robot, msg)
+    bitsPlease.lights()
 
   fauxPasAndon = (msg) ->
     text = msg.envelope.message.text

@@ -10,8 +10,7 @@ class CodeReview extends ChannelResponder
   startRequest: (res) ->
     @robot.requestor = "#{res.message.user.name}"
     console.log('name', "#{res.message.user.name}")
-    console.log('user', JSON.parse(res.message.user))
-    console.log('user2', res.message.user)
+    console.log('user', res.message.user)
 
     @robot.display_name = "#{res.message.user.profile.display_name}"
 

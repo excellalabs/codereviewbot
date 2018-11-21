@@ -60,8 +60,11 @@ class CodeReview extends ChannelResponder
 
   getList: ->
     lists = @robot.brain.get('enr-cr')
+    console.log(lists)
     requestedList = lists.filter (list) =>
       list.some (name) =>
+        console.log('name:', name )
+        console.log('requestor:', @robot.requestor )
         name == @robot.requestor
     requestedList[0].slice(0) # this clones the array, it was doing weird things
 

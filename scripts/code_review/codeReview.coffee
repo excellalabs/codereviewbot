@@ -9,7 +9,11 @@ class CodeReview extends ChannelResponder
 
   startRequest: (res) ->
     @robot.requestor = "#{res.message.user.name}"
-    console.log("#{res.message.user}")
+    console.log('name', "#{res.message.user.name}")
+    console.log('display_name', "#{res.message.user.profile.display_name}")
+    console.log('display_name_normalized', "#{res.message.user.profile.display_name_normalized}")
+    console.log('real_name', "#{res.message.user.profile.real_name}")
+
     @robot.display_name = "#{res.message.user.profile.display_name}"
 
   usageString: () ->
@@ -62,11 +66,8 @@ class CodeReview extends ChannelResponder
 
   getList: ->
     lists = @robot.brain.get('enr-cr')
-    console.log(lists)
     requestedList = lists.filter (list) =>
       list.some (name) =>
-        console.log('name:', name )
-        console.log('requestor:', @robot.requestor )
         name == @robot.requestor
     requestedList[0].slice(0) # this clones the array, it was doing weird things
 

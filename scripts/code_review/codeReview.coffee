@@ -9,6 +9,8 @@ class CodeReview extends ChannelResponder
 
   startRequest: (res) ->
     @robot.requestor = "#{res.message.user.name}"
+    console.log("#{res.message.user}")
+    @robot.display_name = "#{res.message.user.profile.display_name}"
 
   usageString: () ->
     "enr-cr -n <number_of_random_reviewers> -i <list_of_ignored_users> -a <list_of_additional_reviewers>"

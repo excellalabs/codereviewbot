@@ -16,10 +16,13 @@ module.exports = (robot) ->
     slackRoom = msg.envelope.room
     console.log("Message sent: ")
     console.log(msg.envelope.message.text)
+    if slackRoom == process.env.CODE_RED_SLACK_CHANNEL_ID
+      codeRedAndon(msg)
+      fauxPasAndon(msg)
+      bigSilliesAndon(msg)
+      bitsPleaseAndon(msg)
     if slackRoom == process.env.FAUXPAS_SLACK_CHANNEL_ID
       fauxPasAndon(msg)
-    if slackRoom == process.env.CODERED_SLACK_CHANNEL_ID
-      codeRedAndon(msg)
     if slackRoom == process.env.BIGSILLIES_SLACK_CHANNEL_ID
       bigSilliesAndon(msg)
     if slackRoom == process.env.BITSPLEASE_SLACK_CHANNEL_ID

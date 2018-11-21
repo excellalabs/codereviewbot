@@ -4,7 +4,7 @@ module.exports =
 class CodeRed extends ChannelResponder
 
   constructor: (robot, msg)->
-    channelId = process.env.CODERED_SLACK_CHANNEL_ID
+    channelId = process.env.CODE_RED_SLACK_CHANNEL_ID
     super(channelId, robot, msg)
 
   andonResponse: () ->

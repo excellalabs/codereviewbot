@@ -10,6 +10,7 @@ class CodeReview extends ChannelResponder
   startRequest: (res) ->
     @robot.requestor = "#{res.message.user.name}"
     @robot.display_name = "#{res.message.user.slack.profile.display_name}"
+    console.log(res.message.user)
 
   usageString: () ->
     "enr-cr -n <number_of_random_reviewers> -i <list_of_ignored_users> -a <list_of_additional_reviewers>"

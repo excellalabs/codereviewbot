@@ -64,7 +64,7 @@ class CodeReview extends ChannelResponder
     lists = @robot.brain.get('enr-cr')
     requestedList = lists.filter (list) =>
       list.some (name) =>
-        name == @robot.display_name
+        name == @robot.requester
     requestedList[0].slice(0) # this clones the array, it was doing weird things
 
   setList: (list) ->

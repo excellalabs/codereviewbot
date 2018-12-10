@@ -85,7 +85,7 @@ class CodeReview extends ChannelResponder
     data =[
       ['brian.d.palladino', 'Nick Bristow', 'drew.nickerson', 'hughjgardiner', 'daneweber',
        'Cameron Ivey', 'jason.m.danielian', 'dchang', 'glenn.espinosa', 'Khoi Le', 'daniel.herndon',
-        'joehunt', 'andrew.eason', 'Andy Whitley', 'Josh Cohen', 'jen.pengelly']
+        'joseph.b.hunt', 'andrew.eason', 'Andy Whitley', 'Josh Cohen', 'jen.pengelly']
     ]
     @robot.brain.set('enr-cr', data)
 

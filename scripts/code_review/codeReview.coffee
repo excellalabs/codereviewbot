@@ -10,7 +10,6 @@ class CodeReview extends ChannelResponder
   startRequest: (res) ->
     @robot.requestor = "#{res.message.user.name}"
     @robot.display_name = "#{res.message.user.slack.profile.display_name}"
-    console.log(res.message.user)
 
   usageString: () ->
     "enr-cr -n <number_of_random_reviewers> -i <list_of_ignored_users> -a <list_of_additional_reviewers>"
@@ -64,7 +63,7 @@ class CodeReview extends ChannelResponder
     lists = @robot.brain.get('enr-cr')
     requestedList = lists.filter (list) =>
       list.some (name) =>
-        name == @robot.requester
+        name == @robot.display_name
     requestedList[0].slice(0) # this clones the array, it was doing weird things
 
   setList: (list) ->

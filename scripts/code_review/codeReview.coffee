@@ -95,11 +95,12 @@ class CodeReview extends ChannelResponder
       list = list.map (l) -> l.substring(0, 1) + '_' + l.substring(1)
 
     response = prefix
+    console.log(list)
     for l in list
-      if list.count > 1
-        response += (l + ", ")
+      response += (l + ", ")
     if list.count > 0
       response = response.substring(-1)
+    console.log(response)
     return response
 
   cleanNames: (names, allowedValues = null) ->

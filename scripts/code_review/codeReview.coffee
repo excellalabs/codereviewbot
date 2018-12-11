@@ -96,7 +96,8 @@ class CodeReview extends ChannelResponder
 
     response = prefix
     for l in list
-      response += (l + ", ")
+      if list.count > 1
+        response += (l + ", ")
     if list.count > 0
       response = response.substring(-1)
     return response

@@ -25,4 +25,4 @@ Robot listeners (`robot.hear`) must be placed directly under the `/scripts` fold
 
 Create a listener, and then handle it using a Coffeescript class created in your team folder. Your class should inherit from `channelResponder.coffee`, which will restrict your command to your channel. To make this work you must pass in the channel id into the call to `super()` in the constructor. See the `/scripts/faux_pas/fauxPas.coffee` script for an example.
 
-If you don't know what your channel id is, just write the code first. Then run the command in your channel. The command will respond with a helpful message telling you what the channel id is. :-)
+If you don't know what your channel id is, just write the code first. Then run the command in your channel. The command will respond with a helpful message telling you what the channel id is. :-).

@@ -1,1 +1,1 @@
-web: bin/hubot -a slack
+web: bundle exec rails server -p $PORTg

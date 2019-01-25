@@ -44,10 +44,10 @@ class Bot < SlackRubyBot::Bot
   end
 
   operator 'andon' do |client, data, match|
-    client.say(channel: data.channel, text: "<!here CODE RED! Stop what you're doing. Find out what you can do to help.")
+    client.say(channel: data.channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
     if data.channel == ENV['CODE_RED_CHANNEL']
       ENV['TEAM_CHANNELS'].split(",").each do |channel|
-        client.say(channel: channel, text: "!here CODE RED! Stop what you're doing. Find out what you can do to help.")
+        client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
       end
     end
   end

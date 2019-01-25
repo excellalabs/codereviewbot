@@ -3,28 +3,18 @@ class Bot < SlackRubyBot::Bot
     client.say(channel: data.channel, text: match['expression'])
   end
 
-  operator 'share members' do |client, data, match|
+  command 'share members' do |client, data, match|
     slack = Slack::Web::Client.new
-    puts '*' * 25
-    puts slack.channels_info(channel: data.channel)
-    puts '*' * 25
-    puts slack.channels_info(channel: data.channel).to_hash
-    puts '*' * 25
-    puts slack.channels_info(channel: data.channel).to_json
-    puts '*' * 25
-    client.say(channel: data.channel, text: slack.channels_info(channel: data.channel).members)
-  end
-
-  command 'share' do |client, data, match|
-    slack = Slack::Web::Client.new
-    client.say(channel: data.channel, text: slack.channels_info(channel: data.channel))
+    members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
+    client.say(channel: data.channel, text: members)
   end
 
 
   operator 'enr-cr-reset' do |client, data, match|
     slack = Slack::Web::Client.new
     User.destroy_all
-    slack.channels_info(channel: data.channel).members.each do |user|
+    members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
+    members.each do |user|
       User.create!(name: user)
     end
   end

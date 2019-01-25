@@ -10,7 +10,9 @@ class Bot < SlackRubyBot::Bot
     puts '*' * 25
     puts slack.channels_info(channel: data.channel).members
     puts '*' * 25
-    puts data.channel.to_hash.members
+    puts slack.channels_info(channel: data.channel).members.to_hash.members
+    puts '*' * 25
+    puts slack.channels_info(channel: data.channel).members.to_json.members
     puts '*' * 25
     client.say(channel: data.channel, text: slack.channels_info(channel: data.channel).members)
   end

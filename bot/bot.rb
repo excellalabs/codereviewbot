@@ -19,7 +19,8 @@ class Bot < SlackRubyBot::Bot
 
   command 'user-info' do |client, data, match|
     puts data.to_hash
-    client.say(channel: data.channel, text: data.to_hash)
+    client.say(channel: data.channel, text: data.to_hash["user"])
+    client.say(channel: data.channel, text: "<#{data.to_hash["user"]}>_meh")
   end
 
 
@@ -41,6 +42,17 @@ class Bot < SlackRubyBot::Bot
     user.touch
   end
 
+  operator 'andon' do |client, data, match|
+    client.say(channel: data.channel, text: "@here CODE RED! Stop what you're doing. Find out what you can do to help.")
+    if data.channel == ENV['CODE_RED_CHANNEL']
+      puts "*" * 25
+      puts ENV['TEAM_CHANNELS']
+      puts "*" * 25
+      ENV['TEAM_CHANNELS'].each do |channel|
+        client.say(channel: channel, text: "@here CODE RED! Stop what you're doing. Find out what you can do to help.")
+      end
+    end
+  end
 
 
 end

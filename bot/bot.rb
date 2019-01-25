@@ -5,11 +5,13 @@ class Bot < SlackRubyBot::Bot
 
   operator 'share members' do |client, data, match|
     slack = Slack::Web::Client.new
+    puts '*' * 25
     puts slack.channels_info(channel: data.channel)
     puts '*' * 25
     puts slack.channels_info(channel: data.channel).members
     puts '*' * 25
-    puts data.channel.to_h
+    puts data.channel.to_hash.members
+    puts '*' * 25
     client.say(channel: data.channel, text: slack.channels_info(channel: data.channel).members)
   end
 

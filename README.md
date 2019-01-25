@@ -1,46 +1,24 @@
-Slack-Mathbot
-=============
+# README
 
-[![Build Status](https://travis-ci.org/dblock/slack-mathbot.png)](https://travis-ci.org/dblock/slack-mathbot)
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-A math bot for Slack. Math is good for you.
+Things you may want to cover:
 
-![](screenshots/two-plus-two.gif)
+* Ruby version
 
-## Installation
+* System dependencies
 
-See [DEPLOYMENT](DEPLOYMENT.md).
+* Configuration
 
-## Usage
+* Database creation
 
-Invite your bot to a channel. Do math by starting a message with an equal sign.
+* Database initialization
 
-![](screenshots/example.gif)
+* How to run the test suite
 
-### Commands
+* Services (job queues, cache servers, search engines, etc.)
 
-#### mathbot calculate [expression]
+* Deployment instructions
 
-Calculates an expression, currently just basic math. See [Dentaku](https://github.com/rubysolo/dentaku) for what's supported.
-
-#### mathbot
-
-Shows MathBot version and links.
-
-#### mathbot hi
-
-Politely says 'hi' back.
-
-#### mathbot help
-
-Get help.
-
-## Contributing
-
-See [CONTRIBUTING](CONTRIBUTING.md).
-
-## Copyright and License
-
-Copyright (c) 2015, Daniel Doubrovkine, Artsy and [Contributors](CHANGELOG.md).
-
-This project is licensed under the [MIT License](LICENSE.md).
+* ...

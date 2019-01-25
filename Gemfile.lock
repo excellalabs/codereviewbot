@@ -60,6 +60,27 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
       xpath (~> 3.2)
+    celluloid (0.17.4)
+      celluloid-essentials
+      celluloid-extras
+      celluloid-fsm
+      celluloid-pool
+      celluloid-supervision
+      timers (>= 4.1.1)
+    celluloid-essentials (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-extras (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-fsm (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-io (0.17.3)
+      celluloid (>= 0.17.2)
+      nio4r (>= 1.1)
+      timers (>= 4.1.1)
+    celluloid-pool (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-supervision (0.20.6)
+      timers (>= 4.1.1)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chromedriver-helper (2.1.0)
@@ -76,9 +97,15 @@ GEM
     crass (1.0.4)
     erubi (1.8.0)
     execjs (2.7.0)
+    faraday (0.15.4)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.13.0)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.10.0)
+    gli (2.18.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hashie (3.6.0)
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -103,6 +130,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.6)
     multi_json (1.13.1)
+    multipart-post (2.0.0)
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
@@ -157,6 +185,23 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    slack-ruby-bot (0.11.2)
+      hashie
+      slack-ruby-client (>= 0.6.0)
+    slack-ruby-client (0.13.1)
+      activesupport
+      faraday (>= 0.9)
+      faraday_middleware
+      gli
+      hashie
+      websocket-driver
+    slim (4.0.1)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
+    slim-rails (3.2.0)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 5.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -169,9 +214,11 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    temple (0.8.0)
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.9)
+    timers (4.3.0)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -197,6 +244,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
+  celluloid-io
   chromedriver-helper
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
@@ -206,6 +254,8 @@ DEPENDENCIES
   rails (~> 5.2.2)
   sass-rails (~> 5.0)
   selenium-webdriver
+  slack-ruby-bot
+  slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

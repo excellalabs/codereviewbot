@@ -1,11 +1,16 @@
-# This file is used by Rack-based servers to start the application.
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 
-require_relative 'config/environment'
-require ::File.expand_path('../bot/bot', __FILE__)
+require 'slack-mathbot'
+require 'web'
 
-Thread.abort_on_exception = true
 Thread.new do
-  Bot.run
+  begin
+    SlackMathbot::Bot.run
+  rescue Exception => e
+    STDERR.puts "ERROR: #{e}"
+    STDERR.puts e.backtrace
+    raise e
+  end
 end
 
-run Rails.application
+run SlackMathbot::Web

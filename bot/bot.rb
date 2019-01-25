@@ -6,7 +6,10 @@ class Bot < SlackRubyBot::Bot
   command 'share members' do |client, data, match|
     slack = Slack::Web::Client.new
     members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
-    client.say(channel: data.channel, text: members)
+    members.each do |user|
+      client.say(channel: data.channel, text: member)
+    end
+
   end
 
 
@@ -22,7 +25,7 @@ class Bot < SlackRubyBot::Bot
   operator 'enr-cr' do |client, data, match|
     slack = Slack::Web::Client.new
     user = User.order("updated_at ASC").first
-    client.say(channel: data.channel, text: user)
+    client.say(channel: data.channel, text: "<@#{user.name}>")
     user.touch
   end
 

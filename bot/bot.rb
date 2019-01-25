@@ -3,13 +3,18 @@ class Bot < SlackRubyBot::Bot
     client.say(channel: data.channel, text: match['expression'])
   end
 
-  command 'share members' do |client, data, match|
+  command 'shareMembers' do |client, data, match|
     slack = Slack::Web::Client.new
     members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
+    puts members
     members.each do |user|
       client.say(channel: data.channel, text: member)
     end
+  end
 
+  command 'info' do |client, data, match|
+    puts data.to_hash
+    client.say(channel: data.channel, text: data.to_hash)
   end
 
 

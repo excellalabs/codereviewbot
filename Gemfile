@@ -5,6 +5,9 @@ ruby '2.6.0'
 gem 'slim-rails'
 gem 'slack-ruby-bot'
 gem 'celluloid-io'
+
+gem 'slack-ruby-client'
+gem 'async-websocket'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use postgresql as the database for Active Record

@@ -5,6 +5,7 @@ class Bot < SlackRubyBot::Bot
 
 
   command 'share' do |client, data, match|
-    client.say(channel: data.channel, text: client.channels_info(channel: data.channel))
+    slack = Slack::Web::Client.new
+    client.say(channel: data.channel, text: slack.channels_info(channel: data.channel))
   end
 end

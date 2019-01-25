@@ -8,7 +8,7 @@ class Bot < SlackRubyBot::Bot
     members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
     puts members
     members.each do |member|
-      client.say(channel: data.channel, text: member)
+      client.say(channel: data.channel, text: "#{member} - <@#{member}>")
     end
   end
 
@@ -17,18 +17,12 @@ class Bot < SlackRubyBot::Bot
     client.say(channel: data.channel, text: data.to_hash)
   end
 
-  command 'user-info' do |client, data, match|
-    puts data.to_hash
-    client.say(channel: data.channel, text: data.to_hash["user"])
-    client.say(channel: data.channel, text: "<@#{data.to_hash["user"]}>_meh")
-    client.say(channel: data.channel, text: "<#{data.to_hash["user"]}>")
-  end
-
-
   operator 'enr-cr-reset' do |client, data, match|
     slack = Slack::Web::Client.new
     User.destroy_all
     members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
+    members_to_exclude = ENV['EXCLUDED_MEMBERS'].split(",")
+    members.reject! { |id| members_to_exclude .include?(id) }
     members.each do |user|
       User.create!(name: user)
     end

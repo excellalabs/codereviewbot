@@ -100,6 +100,9 @@ class Bot < SlackRubyBot::Bot
     require 'net/http'
 
     url = URI.parse("https://maker.ifttt.com/trigger/lights_on/with/key/#{ENV['SILLIES_IFTTT_KEY']}")
+    puts url
+    puts '*' * 25
+    puts url.to_s
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) {|http|
       http.request(req)

@@ -47,7 +47,7 @@ class Bot < SlackRubyBot::Bot
   operator 'cr-exclude' do |client, data, match|
     excluded_members = match['expression'].split(",")
     excluded_members.each do |user|
-      User.create!(name: user, channel: data.channel, active: false)
+      User.create!(name: user.strip, channel: data.channel, active: false)
     end
 
     client.say(channel: data.channel, text: "#{excluded_members.count} user(s) excluded")

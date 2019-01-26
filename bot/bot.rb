@@ -75,7 +75,7 @@ class Bot < SlackRubyBot::Bot
   end
 
   operator 'clear-exclude' do |client, data, match|
-    excluded_users = User.where(active: false, channel: data.channel).pluck(:name)
+    excluded_users = User.where(active: false, channel: data.channel)
     count = excluded_users.count
     excluded_users.destroy_all
     client.say(channel: data.channel, text: "#{count} user(s) no longer excluded in this channel", thread_ts: data.thread_ts || data.ts)
@@ -89,4 +89,65 @@ class Bot < SlackRubyBot::Bot
       end
     end
   end
+
+  operator 'sillyOn' do |client, data, match|
+    Bot.turn_on_silly_lights
+  end
+
+  operator 'sillyOff' do |client, data, match|
+    Bot.turn_off_silly_lights
+  end
+
+  operator 'bitsOn' do |client, data, match|
+    Bot.turn_on_bits_lights
+  end
+
+  operator 'bitsOff' do |client, data, match|
+    Bot.turn_off_bits_lights
+  end
+
+  operator 'fauxOn' do |client, data, match|
+    Bot.turn_on_faux_lights
+  end
+
+  operator 'fauxOff' do |client, data, match|
+    Bot.turn_off_faux_lights
+  end
+
+  def self.turn_on_silly_lights
+    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{ENV['SILLIES_IFTTT_KEY']}"
+    response = HTTParty.get(url)
+    puts response.body
+  end
+
+  def self.turn_off_silly_lights
+    url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{ENV['SILLIES_IFTTT_KEY']}"
+    response = HTTParty.get(url)
+    puts response.body
+  end
+
+  def self.turn_on_bits_lights
+    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{ENV['BITS_IFTTT_KEY']}"
+    response = HTTParty.get(url)
+    puts response.body
+  end
+
+  def self.turn_off_bits_lights
+    url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{ENV['BITS_IFTTT_KEY']}"
+    response = HTTParty.get(url)
+    puts response.body
+  end
+
+  def self.turn_on_faux_lights
+    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{ENV['FAUXPAS_IFTTT_KEY']}"
+    response = HTTParty.get(url)
+    puts response.body
+  end
+
+  def self.turn_off_faux_lights
+    url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{ENV['FAUXPAS_IFTTT_KEY']}"
+    response = HTTParty.get(url)
+    puts response.body
+  end
+
 end

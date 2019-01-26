@@ -19,11 +19,17 @@ class Bot < SlackRubyBot::Bot
 
   operator 'code-review-reset' do |client, data, match|
     slack = Slack::Web::Client.new
-    User.where(active: true, channel: data.channel).destroy_all
+    old_users = User.where(active: true, channel: data.channel)
+    puts 'old_users: ' + old_users
+    old_users.destroy_all
     members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
-    members_to_exclude =  User.where(active: false).pluck(:name)
-    
+    puts 'members: ' + members
+    members_to_exclude = User.where(active: false).pluck(:name)
+    puts 'members_to_exclude: ' + members_to_exclude
+
     members.reject! { |id| members_to_exclude.include?(id) }
+    puts 'members: ' + members
+    puts 'channel: ' + data.channel
     members.each do |user|
       User.create!(name: user, channel: data.channel)
     end

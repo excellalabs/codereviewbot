@@ -89,4 +89,22 @@ class Bot < SlackRubyBot::Bot
       end
     end
   end
+
+  operator 'sillyOn' do |client, data, match|
+    turn_on_silly_lights
+  end
+
+
+
+  def turn_on_silly_lights
+    require 'net/http'
+
+    url = URI.parse("https://maker.ifttt.com/trigger/lights_on/with/key/#{ENV['SILLIES_IFTTT_KEY']}")
+    req = Net::HTTP::Get.new(url.to_s)
+    res = Net::HTTP.start(url.host, url.port) {|http|
+      http.request(req)
+    }
+    puts res.body
+  end
+
 end

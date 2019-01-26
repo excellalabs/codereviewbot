@@ -35,7 +35,7 @@ class Bot < SlackRubyBot::Bot
     user = users.first
     user = users.second if user.name == data["user"]
 
-    client.say(channel: data.channel, text: "<@#{user.name}>")
+    client.say(channel: data.channel, text: "<@#{user.name}>", thread_ts: data.thread_ts || data.ts)
     user.touch
   end
 

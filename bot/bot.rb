@@ -30,7 +30,7 @@ class Bot < SlackRubyBot::Bot
     end
   end
 
-  operator 'code-review' do |client, data, match|
+  operator 'cd-rv' do |client, data, match|
     users = User.where(channel: data.channel, active: true).order("updated_at ASC")
     user = users.first
     user = users.second if user.name == data["user"]

@@ -75,7 +75,7 @@ class Bot < SlackRubyBot::Bot
   end
 
   operator 'clear-exclude' do |client, data, match|
-    excluded_users = User.where(active: false, channel: data.channel).pluck(:name)
+    excluded_users = User.where(active: false, channel: data.channel)
     count = excluded_users.count
     excluded_users.destroy_all
     client.say(channel: data.channel, text: "#{count} user(s) no longer excluded in this channel", thread_ts: data.thread_ts || data.ts)

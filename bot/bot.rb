@@ -91,12 +91,12 @@ class Bot < SlackRubyBot::Bot
   end
 
   operator 'sillyOn' do |client, data, match|
-    turn_on_silly_lights
+    Bot.turn_on_silly_lights
   end
 
 
 
-  def turn_on_silly_lights
+  def self.turn_on_silly_lights
     require 'net/http'
 
     url = URI.parse("https://maker.ifttt.com/trigger/lights_on/with/key/#{ENV['SILLIES_IFTTT_KEY']}")

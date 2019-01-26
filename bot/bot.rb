@@ -8,13 +8,13 @@ class Bot < SlackRubyBot::Bot
     members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
     puts members
     members.each do |member|
-      client.say(channel: data.channel, text: "#{member} - <@#{member}>")
+      client.say(channel: data.channel, text: "#{member} - <@#{member}>", thread_ts: data.thread_ts || data.ts)
     end
   end
 
   command 'info' do |client, data, match|
     puts data.to_hash
-    client.say(channel: data.channel, text: data.to_hash)
+    client.say(channel: data.channel, text: data.to_hash, thread_ts: data.thread_ts || data.ts)
   end
 
   operator 'code-review-reset' do |client, data, match|
@@ -35,13 +35,13 @@ class Bot < SlackRubyBot::Bot
     user = users.first
     user = users.second if user.name == data["user"]
 
-    client.say(channel: data.channel, text: "<@#{user.name}>")
+    client.say(channel: data.channel, text: "<@#{user.name}>", thread_ts: data.thread_ts || data.ts)
     user.touch
   end
 
   operator 'cr-excluded-list' do |client, data, match|
     excluded_users = User.where(active: false, channel: data.channel).pluck(:name)
-    client.say(channel: data.channel, text: excluded_users)
+    client.say(channel: data.channel, text: excluded_users, thread_ts: data.thread_ts || data.ts)
   end
 
   operator 'cr-exclude' do |client, data, match|
@@ -50,14 +50,14 @@ class Bot < SlackRubyBot::Bot
       User.create!(name: user.strip, channel: data.channel, active: false)
     end
 
-    client.say(channel: data.channel, text: "#{excluded_members.count} user(s) excluded")
+    client.say(channel: data.channel, text: "#{excluded_members.count} user(s) excluded", thread_ts: data.thread_ts || data.ts)
   end
 
   operator 'clear-excluded' do |client, data, match|
     excluded_users = User.where(active: false, channel: data.channel).pluck(:name)
     count = excluded_users.count
     excluded_users.destroy_all
-    client.say(channel: data.channel, text: "#{count} user(s) no longer excluded in this channel")
+    client.say(channel: data.channel, text: "#{count} user(s) no longer excluded in this channel", thread_ts: data.thread_ts || data.ts)
   end
 
 

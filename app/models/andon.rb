@@ -1,0 +1,3 @@
+class Andon < ApplicationRecord
+
+end

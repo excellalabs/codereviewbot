@@ -79,8 +79,10 @@ class Bot < SlackRubyBot::Bot
   end
 
   operator 'andon' do |client, data, match|
+    slack = Slack::Web::Client.new
+    channel_name = slack.channels_info(channel: data.channel).to_hash["channel"]["name"]
     client.say(channel: data.channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
-    Andon.create(channel: data.channel, issue: match['expression'])
+    Andon.create(channel: channel_name, issue: match['expression'])
     if data.channel == ENV['CODE_RED_CHANNEL']
       ENV['TEAM_CHANNELS'].split(",").each do |channel|
         client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")

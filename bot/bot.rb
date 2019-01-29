@@ -20,9 +20,6 @@ class Bot < SlackRubyBot::Bot
     end
   end
 
-  command 'say' do |client, data, match|
-    client.say(channel: data.channel, text: match['expression'])
-  end
 
   operator 'channel-members' do |client, data, match|
     slack = Slack::Web::Client.new
@@ -83,6 +80,7 @@ class Bot < SlackRubyBot::Bot
 
   operator 'andon' do |client, data, match|
     client.say(channel: data.channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
+    Andon.create(channel: data.channel, issue: match['expression'])
     if data.channel == ENV['CODE_RED_CHANNEL']
       ENV['TEAM_CHANNELS'].split(",").each do |channel|
         client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")

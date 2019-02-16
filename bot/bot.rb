@@ -62,14 +62,14 @@ class Bot < SlackRubyBot::Bot
     client.say(channel: data.channel, text: "#{excluded_members.count} user(s) excluded", thread_ts: data.thread_ts || data.ts)
   end
 
-  operator 'cd-rv' do |client, data, match|
-    users = User.where(channel: data.channel, active: true).order("updated_at ASC")
-    user = users.first
-    user = users.second if user.name == data["user"]
-
-    client.say(channel: data.channel, text: "<@#{user.name}>", thread_ts: data.thread_ts || data.ts)
-    user.touch
-  end
+  # operator 'cd-rv' do |client, data, match|
+  #   users = User.where(channel: data.channel, active: true).order("updated_at ASC")
+  #   user = users.first
+  #   user = users.second if user.name == data["user"]
+  #
+  #   client.say(channel: data.channel, text: "<@#{user.name}>", thread_ts: data.thread_ts || data.ts)
+  #   user.touch
+  # end
 
   operator 'clear-exclude' do |client, data, match|
     excluded_users = User.where(active: false, channel: data.channel)

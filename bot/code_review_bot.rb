@@ -35,8 +35,10 @@ class CodeReviewBot < SlackRubyBot::Bot
     puts 'cd-rv-exclude called'
     excluded_members = match['expression'].split(",")
     excluded_members.each do |user|
-      puts user
-      user_id = slack.users_info(user: user.strip.gsub(/[<>]/, "")).to_hash["user"]["id"]
+      puts user.strip.gsub(/[<@>]/, "")
+      user_search = slack.users_info(user: user.strip.gsub(/[<@>]/, ""))
+      puts user_search
+      user_id = user_search.to_hash["user"]["id"]
       puts user_id
       User.create!(name: user_id, channel: data.channel, active: false)
     end

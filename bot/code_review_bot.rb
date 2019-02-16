@@ -25,16 +25,19 @@ class CodeReviewBot < SlackRubyBot::Bot
   end
 
   operator 'cd-rv-exclude-list' do |client, data, match|
+    puts 'cd-rv-exclude-list called'
     excluded_users = User.where(active: false, channel: data.channel).pluck(:name)
     client.say(channel: data.channel, text: excluded_users, thread_ts: data.thread_ts || data.ts)
   end
 
   operator 'cd-rv-exclude' do |client, data, match|
     slack = Slack::Web::Client.new
-
+    puts 'cd-rv-exclude called'
     excluded_members = match['expression'].split(",")
     excluded_members.each do |user|
+      puts user
       user_id = slack.users_info(user: user.strip.gsub(/[<>]/, "")).to_hash["user"]["id"]
+      puts user_id
       User.create!(name: user_id, channel: data.channel, active: false)
     end
 

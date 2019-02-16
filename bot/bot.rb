@@ -95,6 +95,7 @@ class Bot < SlackRubyBot::Bot
       client.say(channel: data.channel, text: "<!here> Stop what you're doing. Find out what you can do to help.")
       Bot.turn_on_lights(data.channel)
     end
+
   end
 
   operator 'add-device' do |client, data, match|

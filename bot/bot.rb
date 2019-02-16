@@ -15,9 +15,9 @@ class Bot < SlackRubyBot::Bot
       desc 'Set the list of users in the channel you can call. Run this command again if you add a user to the excluded list'
     end
 
-    command 'cd-rv' do
-      desc 'This will rotate through the list of users previously set'
-    end
+    # command 'cd-rv' do
+    #   desc 'This will rotate through the list of users previously set'
+    # end
   end
 
 
@@ -81,16 +81,33 @@ class Bot < SlackRubyBot::Bot
   operator 'andon' do |client, data, match|
     slack = Slack::Web::Client.new
     channel_name = slack.channels_info(channel: data.channel).to_hash["channel"]["name"]
+
     Andon.create(channel: channel_name, issue: match['expression'])
     if data.channel == ENV['CODE_RED_CHANNEL']
       client.say(channel: data.channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
+      Bot.turn_on_silly_lights
+      Bot.turn_on_bits_lights
+      Bot.turn_on_faux_lights
       ENV['TEAM_CHANNELS'].split(",").each do |channel|
         client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
       end
     else
       client.say(channel: data.channel, text: "<!here> Stop what you're doing. Find out what you can do to help.")
+      Bot.turn_on_lights(data.channel)
     end
 
+  end
+
+  operator 'add-device' do |client, data, match|
+    Device.create(channel: data.channel, key: match['expression'])
+  end
+
+  operator 'lightsOn' do |client, data, match|
+    Bot.turn_on_lights(data.channel)
+  end
+
+  operator 'sillyOn' do |client, data, match|
+    Bot.turn_on_silly_lights
   end
 
   operator 'sillyOn' do |client, data, match|
@@ -115,6 +132,16 @@ class Bot < SlackRubyBot::Bot
 
   operator 'fauxOff' do |client, data, match|
     Bot.turn_off_faux_lights
+  end
+
+  def self.turn_on_lights(channel)
+    device = Device.where(channel: channel).first
+    return unless device.any?
+
+    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{device.key}"
+    response = HTTParty.get(url)
+
+    puts response.body
   end
 
   def self.turn_on_silly_lights

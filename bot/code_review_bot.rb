@@ -34,7 +34,7 @@ class CodeReviewBot < SlackRubyBot::Bot
 
     excluded_members = match['expression'].split(",")
     excluded_members.each do |user|
-      user_id = slack.users_info(user: user.strip).to_hash["user"]["id"]
+      user_id = slack.users_info(user: user.strip.gsub(/[<>]/, "")).to_hash["user"]["id"]
       User.create!(name: user_id, channel: data.channel, active: false)
     end
 

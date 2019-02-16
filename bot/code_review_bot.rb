@@ -3,20 +3,20 @@ class CodeReviewBot < SlackRubyBot::Bot
     title 'Code Review Bot'
     desc 'This bot allows you to rotate through channel members for code reviews or pull requests'
 
-    command 'channel-members' do
-      desc 'Lists user ids in the channel so that you know who to exclude'
+    command 'cd-rv-set' do
+      desc 'Set the initial list of users in the channel you can call'
     end
 
     command 'cd-rv-exclude USERID1 USERID2' do
       desc 'Allows you to exclude members in a channel from getting selected'
     end
 
-    command 'cd-rv-set' do
-      desc 'Set the initial list of users in the channel you can call'
-    end
-
     command 'cd-rv' do
       desc 'This will rotate through the list of users previously set'
+    end
+
+    command 'channel-members' do
+      desc 'Lists user ids in the channel'
     end
   end
 
@@ -25,21 +25,37 @@ class CodeReviewBot < SlackRubyBot::Bot
   end
 
   operator 'cd-rv-exclude-list' do |client, data, match|
-    puts 'cd-rv-exclude-list called'
+    slack = Slack::Web::Client.new
     excluded_users = User.where(active: false, channel: data.channel).pluck(:name)
-    client.say(channel: data.channel, text: excluded_users, thread_ts: data.thread_ts || data.ts)
+    excluded_names = []
+
+    excluded_users.each do |user|
+      name = slack.users_info(user: user.strip.gsub(/[<@>]/, "")).to_hash["user"]["real_name"]
+      excluded_names.push(name)
+    end
+
+    client.say(channel: data.channel, text: excluded_names, thread_ts: data.thread_ts || data.ts)
+  end
+
+  operator 'cd-rv-list' do |client, data, match|
+    slack = Slack::Web::Client.new
+    active_members = User.where(active: true, channel: data.channel).pluck(:name)
+    active_names = []
+
+    active_members.each do |user|
+      name = slack.users_info(user: user.strip.gsub(/[<@>]/, "")).to_hash["user"]["real_name"]
+      active_names.push(name)
+    end
+
+    client.say(channel: data.channel, text: active_names, thread_ts: data.thread_ts || data.ts)
   end
 
   operator 'cd-rv-exclude' do |client, data, match|
     slack = Slack::Web::Client.new
-    puts 'cd-rv-exclude called'
     excluded_members = match['expression'].split(",")
+
     excluded_members.each do |user|
-      puts user.strip.gsub(/[<@>]/, "")
-      user_search = slack.users_info(user: user.strip.gsub(/[<@>]/, ""))
-      puts user_search
-      user_id = user_search.to_hash["user"]["id"]
-      puts user_id
+      user_id = slack.users_info(user: user.strip.gsub(/[<@>]/, "")).to_hash["user"]["id"]
       User.create!(name: user_id, channel: data.channel, active: false)
     end
 

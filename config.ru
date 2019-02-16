@@ -2,10 +2,12 @@
 
 require_relative 'config/environment'
 require ::File.expand_path('../bot/bot', __FILE__)
+require ::File.expand_path('../bot/code_review_bot', __FILE__)
 
 Thread.abort_on_exception = true
 Thread.new do
   Bot.run
   CodeReviewBot.run
 end
+
 run Rails.application

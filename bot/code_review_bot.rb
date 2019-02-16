@@ -30,9 +30,12 @@ class CodeReviewBot < SlackRubyBot::Bot
   end
 
   operator 'cd-rv-exclude' do |client, data, match|
+    slack = Slack::Web::Client.new
+
     excluded_members = match['expression'].split(",")
     excluded_members.each do |user|
-      User.create!(name: user.strip, channel: data.channel, active: false)
+      user_id = slack.users_info(user: user.strip).to_hash["user"]["id"]
+      User.create!(name: user_id, channel: data.channel, active: false)
     end
 
     CodeReviewBot.set_code_review_list(data.channel)

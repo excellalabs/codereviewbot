@@ -15,9 +15,22 @@ class CodeReviewBot < SlackRubyBot::Bot
       desc 'This will rotate through the list of users previously set'
     end
 
+    command 'cd-rv-list' do
+      desc 'Lists user that are part of the code review list'
+    end
+
+    command 'cd-rv-exclude-list' do
+      desc 'Lists user that are excluded from code review'
+    end
+
     command 'channel-members' do
       desc 'Lists user ids in the channel'
     end
+
+    command 'cd-rv-add' do
+      desc 'Adds a user to the code review list'
+    end
+
   end
 
   operator 'cd-rv-set' do |client, data, match|
@@ -63,6 +76,20 @@ class CodeReviewBot < SlackRubyBot::Bot
     client.say(channel: data.channel, text: "#{excluded_members.count} user(s) excluded", thread_ts: data.thread_ts || data.ts)
   end
 
+  operator 'cd-rv-add' do |client, data, match|
+    slack = Slack::Web::Client.new
+
+    members_to_add = match['expression'].split(",")
+    members_to_add.each do |user|
+      user_id = slack.users_info(user: user.strip.gsub(/[<@>]/, "")).to_hash["user"]["id"]
+      existing_user = User.where(channel: data.channel, name: user_id).first
+      existing_user.destroy if existing_user
+      User.create!(name: user_id, channel: data.channel)
+    end
+
+    client.say(channel: data.channel, text: "#{members_to_add.count} user(s) added to code review", thread_ts: data.thread_ts || data.ts)
+  end
+
   operator 'cd-rv' do |client, data, match|
     users = User.where(channel: data.channel, active: true).order("updated_at ASC")
     user = users.first
@@ -72,12 +99,7 @@ class CodeReviewBot < SlackRubyBot::Bot
     user.touch
   end
 
-  operator 'clear-excluded' do |client, data, match|
-    excluded_users = User.where(active: false, channel: data.channel)
-    count = excluded_users.count
-    excluded_users.destroy_all
-    client.say(channel: data.channel, text: "#{count} user(s) no longer excluded in this channel", thread_ts: data.thread_ts || data.ts)
-  end
+
 
   def self.set_code_review_list(channel)
     slack = Slack::Web::Client.new

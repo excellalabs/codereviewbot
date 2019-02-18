@@ -73,7 +73,7 @@ class Bot < SlackRubyBot::Bot
     device = Device.where(channel: channel)
     return unless device.any?
 
-    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{device.first.key}"
+    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{device.first.key.strip}"
     response = HTTParty.get(url)
 
     puts response.body

@@ -70,10 +70,10 @@ class Bot < SlackRubyBot::Bot
   end
 
   def self.turn_on_lights(channel)
-    device = Device.where(channel: channel).first
+    device = Device.where(channel: channel)
     return unless device.any?
 
-    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{device.key}"
+    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{device.first.key}"
     response = HTTParty.get(url)
 
     puts response.body

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_16_195502) do
+ActiveRecord::Schema.define(version: 2019_02_18_152756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2019_02_16_195502) do
     t.index ["creator_id"], name: "index_blazer_queries_on_creator_id"
   end
 
-  create_table "device_tables", force: :cascade do |t|
+  create_table "devices", force: :cascade do |t|
     t.string "channel"
     t.string "key"
   end

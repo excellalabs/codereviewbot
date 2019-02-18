@@ -41,6 +41,10 @@ class Bot < SlackRubyBot::Bot
     Bot.turn_on_lights(data.channel)
   end
 
+  operator 'lightsOff' do |client, data, match|
+    Bot.turn_off_lights(data.channel)
+  end
+
   operator 'sillyOn' do |client, data, match|
     Bot.turn_on_silly_lights
   end
@@ -73,7 +77,17 @@ class Bot < SlackRubyBot::Bot
     device = Device.where(channel: channel)
     return unless device.any?
 
-    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{device.first.key}"
+    url = "https://maker.ifttt.com/trigger/lights_on/with/key/#{device.first.key.strip}"
+    response = HTTParty.get(url)
+
+    puts response.body
+  end
+
+  def self.turn_off_lights(channel)
+    device = Device.where(channel: channel)
+    return unless device.any?
+
+    url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{device.first.key.strip}"
     response = HTTParty.get(url)
 
     puts response.body

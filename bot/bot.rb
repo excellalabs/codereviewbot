@@ -29,6 +29,8 @@ class Bot < SlackRubyBot::Bot
     else
       client.say(channel: data.channel, text: "<!here> Stop what you're doing. Find out what you can do to help.")
       Bot.turn_on_lights(data.channel)
+      sleep(30)
+      Bot.turn_off_lights(data.channel)
     end
 
   end

@@ -20,9 +20,9 @@ class Bot < SlackRubyBot::Bot
     Andon.create(channel: channel_name, issue: match['expression'])
     if data.channel == ENV['CODE_RED_CHANNEL']
       client.say(channel: data.channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
-      Bot.eve_lights_on
+      Bot.eve_lights_on(client)
       sleep(30)
-      Bot.eve_lights_off
+      Bot.eve_lights_off(client)
     else
       client.say(channel: data.channel, text: "<!here> Stop what you're doing. Find out what you can do to help.")
       Bot.turn_on_lights(data.channel)
@@ -128,14 +128,14 @@ class Bot < SlackRubyBot::Bot
     puts response.body
   end
 
-  def self.eve_lights_on
+  def self.eve_lights_on(client)
     ENV['TEAM_CHANNELS'].split(",").each do |channel|
       client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
       Bot.turn_on_lights(channel)
     end
   end
 
-  def self.eve_lights_off
+  def self.eve_lights_off(client)
     ENV['TEAM_CHANNELS'].split(",").each do |channel|
       client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
       Bot.turn_off_lights(channel)

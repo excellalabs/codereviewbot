@@ -20,12 +20,9 @@ class Bot < SlackRubyBot::Bot
     Andon.create(channel: channel_name, issue: match['expression'])
     if data.channel == ENV['CODE_RED_CHANNEL']
       client.say(channel: data.channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
-      Bot.turn_on_silly_lights
-      Bot.turn_on_bits_lights
-      Bot.turn_on_faux_lights
-      ENV['TEAM_CHANNELS'].split(",").each do |channel|
-        client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
-      end
+      Bot.eve_lights_on
+      sleep(30)
+      Bot.eve_lights_off
     else
       client.say(channel: data.channel, text: "<!here> Stop what you're doing. Find out what you can do to help.")
       Bot.turn_on_lights(data.channel)
@@ -129,5 +126,19 @@ class Bot < SlackRubyBot::Bot
     url = "https://maker.ifttt.com/trigger/lights_off/with/key/#{ENV['FAUXPAS_IFTTT_KEY']}"
     response = HTTParty.get(url)
     puts response.body
+  end
+
+  def self.eve_lights_on
+    ENV['TEAM_CHANNELS'].split(",").each do |channel|
+      client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
+      Bot.turn_on_lights(channel)
+    end
+  end
+
+  def self.eve_lights_off
+    ENV['TEAM_CHANNELS'].split(",").each do |channel|
+      client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
+      Bot.turn_off_lights(channel)
+    end
   end
 end

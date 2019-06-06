@@ -22,7 +22,7 @@ class Bot < SlackRubyBot::Bot
       client.say(channel: data.channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
       Bot.eve_lights_on(client)
       sleep(30)
-      Bot.eve_lights_off(client)
+      Bot.eve_lights_off
     else
       client.say(channel: data.channel, text: "<!here> Stop what you're doing. Find out what you can do to help.")
       Bot.turn_on_lights(data.channel)
@@ -135,9 +135,8 @@ class Bot < SlackRubyBot::Bot
     end
   end
 
-  def self.eve_lights_off(client)
+  def self.eve_lights_off
     ENV['TEAM_CHANNELS'].split(",").each do |channel|
-      client.say(channel: channel, text: "<!here> CODE RED! Stop what you're doing. Find out what you can do to help.")
       Bot.turn_off_lights(channel)
     end
   end

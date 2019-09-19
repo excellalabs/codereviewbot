@@ -52,7 +52,7 @@ class CodeReviewBot < SlackRubyBot::Bot
 
   operator 'cd-rv-list' do |client, data, match|
     slack = Slack::Web::Client.new
-    active_members = User.where(active: true, channel: data.channel).pluck(:name)
+    active_members = User.where(active: true, channel: data.channel).order("updated_at ASC").pluck(:name)
     active_names = []
 
     active_members.each do |user|

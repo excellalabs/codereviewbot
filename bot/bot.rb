@@ -4,7 +4,8 @@ class Bot < SlackRubyBot::Bot
     members = slack.channels_info(channel: data.channel).to_hash["channel"]["members"]
     puts members
     members.each do |member|
-      client.say(channel: data.channel, text: "#{member} - <@#{member}>", thread_ts: data.thread_ts || data.ts)
+      name = slack.users_info(user: member).to_hash["user"]["real_name"]
+      client.say(channel: data.channel, text: "#{member} - #{name}", thread_ts: data.thread_ts || data.ts)
     end
   end
 

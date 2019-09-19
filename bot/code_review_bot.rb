@@ -56,8 +56,12 @@ class CodeReviewBot < SlackRubyBot::Bot
     active_names = []
 
     active_members.each do |user|
-      name = slack.users_info(user: user.strip.gsub(/[<@>]/, "")).to_hash["user"]["real_name"]
-      active_names.push(name)
+      slack_user = slack.users_info(user: user.strip.gsub(/[<@>]/, "")).to_hash["user"]
+      name = slack_user["real_name"]
+      id = slack_user["id"]
+
+      channel_member = "#{name} - #{id}"
+      active_names.push(channel_member)
     end
 
     client.say(channel: data.channel, text: active_names, thread_ts: data.thread_ts || data.ts)

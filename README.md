@@ -2,7 +2,7 @@
 
 ## This slackbot serves 2 purposes
  1. Code review: It will cycle through members in a channel for code reviews of pull requests
- 2. Andon: It also allows members of a channel to pull a virtual andon cord in order to call for help from teammates. Learn more about this experiment [here] (https://confengine.com/agiledc-2019/proposal/10527/andon-cords-in-development-teams-our-experience-of-driving-continuous-learning-through-a-culture-of-experimentation)
+ 2. Andon: It also allows members of a channel to pull a virtual andon cord in order to call for help from teammates. Learn more about this experiment [here](https://confengine.com/agiledc-2019/proposal/10527/andon-cords-in-development-teams-our-experience-of-driving-continuous-learning-through-a-culture-of-experimentation)
  
 ## Code Review
 ### Experiment
@@ -17,5 +17,5 @@ Instead, by expanding who was doing the review we expanded the opportunity for f
 Additionally, it forced the spread of knowledge on the team because if someone didn't understand something then the owner of the pull request had to explain it in order to get it approved.
 
 ## Andon
-You can find a thorough write up on this experiment [here] (https://confengine.com/agiledc-2019/proposal/10527/andon-cords-in-development-teams-our-experience-of-driving-continuous-learning-through-a-culture-of-experimentation) 
+You can find a thorough write up on this experiment [here](https://confengine.com/agiledc-2019/proposal/10527/andon-cords-in-development-teams-our-experience-of-driving-continuous-learning-through-a-culture-of-experimentation) 
 
